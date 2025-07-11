@@ -35,9 +35,9 @@ const ReCaptcha = ({ onVerify, onError, onExpire }) => {
             return;
         }
 
-        let scriptLoadTimeout;
-        let apiReadyTimeout;
         let checkInterval;
+        let retryCount = 0;
+        const maxRetries = 10;
 
         const loadScript = () => {
             // Check if script already exists
@@ -59,9 +59,19 @@ const ReCaptcha = ({ onVerify, onError, onExpire }) => {
             
             script.onerror = () => {
                 if (mounted.current) {
-                    const errorMsg = 'Failed to load reCAPTCHA script';
-                    setError(errorMsg);
-                    onError?.(errorMsg);
+                    retryCount++;
+                    if (retryCount < maxRetries) {
+                        // Retry loading the script after a short delay
+                        setTimeout(() => {
+                            if (mounted.current) {
+                                loadScript();
+                            }
+                        }, 2000);
+                    } else {
+                        const errorMsg = 'Failed to load reCAPTCHA script after multiple attempts';
+                        setError(errorMsg);
+                        onError?.(errorMsg);
+                    }
                 }
             };
             
@@ -72,44 +82,38 @@ const ReCaptcha = ({ onVerify, onError, onExpire }) => {
             if (window.grecaptcha && window.grecaptcha.render) {
                 if (mounted.current) {
                     setIsLoaded(true);
-                    clearTimeout(apiReadyTimeout);
                     clearInterval(checkInterval);
                 }
                 return;
             }
 
-            // Set up interval to check for API readiness
+            // Set up interval to check for API readiness with exponential backoff
+            let checkDelay = 100;
             checkInterval = setInterval(() => {
                 if (window.grecaptcha && window.grecaptcha.render) {
                     if (mounted.current) {
                         setIsLoaded(true);
                         clearInterval(checkInterval);
-                        clearTimeout(apiReadyTimeout);
                     }
+                } else {
+                    // Increase delay gradually to avoid overwhelming the system
+                    checkDelay = Math.min(checkDelay * 1.1, 2000);
+                    clearInterval(checkInterval);
+                    checkInterval = setInterval(() => {
+                        if (window.grecaptcha && window.grecaptcha.render) {
+                            if (mounted.current) {
+                                setIsLoaded(true);
+                                clearInterval(checkInterval);
+                            }
+                        }
+                    }, checkDelay);
                 }
-            }, 100);
+            }, checkDelay);
         };
-
-        // Set timeouts
-        scriptLoadTimeout = setTimeout(() => {
-            if (mounted.current && !isLoaded) {
-                const errorMsg = 'reCAPTCHA script failed to load within 30 seconds';
-                setError(errorMsg);
-                onError?.(errorMsg);
-            }
-        }, 30000);
-
-        apiReadyTimeout = setTimeout(() => {
-            if (mounted.current && !isLoaded) {
-                // Don't set this as an error since the script might still be loading
-            }
-        }, 15000);
 
         loadScript();
 
         return () => {
-            clearTimeout(scriptLoadTimeout);
-            clearTimeout(apiReadyTimeout);
             clearInterval(checkInterval);
         };
     }, [siteKey, onError]);
