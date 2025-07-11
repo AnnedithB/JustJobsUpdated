@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { ReactSVG } from 'react-svg';
 import './ServiceOne.css';
 
@@ -47,14 +48,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Upload your CV and get instant analysis on grammar, structure, and content. Receive a CV score and suggestions for improvement.
                                 </p>
-                                <a href="/resume-audit" className="btn-arrow">
+                                <Link href="/resume-audit" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12 col-12">
@@ -79,14 +80,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Find the best jobs filtered by type, location, industry, and salary. Apply externally or bookmark jobs to revisit later.
                                 </p>
-                                <a href="job-listing" className="btn-arrow">
+                                <Link href="/job-listing" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12 col-12">
@@ -111,14 +112,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Stay ahead with email notifications for job openings that match your liking and preferences all year around.
                                 </p>
-                                <a href="/job-alerts" className="btn-arrow">
+                                <Link href="/job-alerts" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12 col-12">
@@ -143,14 +144,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Enter your info once, choose from sleek templates, and download a polished resume instantly.
                                 </p>
-                                <a href="/resume-builder" className="btn-arrow">
+                                <Link href="/resume-builder" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12 col-12">
@@ -175,14 +176,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Access downloadable guides, templates, and tips to help you land your dream job.
                                 </p>
-                                <a href="/downloadable-resources" className="btn-arrow">
+                                <Link href="/downloadable-resources" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12 col-12">
@@ -207,14 +208,14 @@ function ServiceOne() {
                                 <p className="disc">
                                 Stay informed with updates, job market trends, and application strategies from hiring experts.
                                 </p>
-                                <a href="/blogs" className="btn-arrow">
+                                <Link href="/blogs" className="btn-arrow">
                                     Learn More
                                     <img
                                         className="injectable"
                                         src="assets/images/icons/arrow-right.svg"
                                         alt="arrow"
                                     />
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
