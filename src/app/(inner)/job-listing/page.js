@@ -27,7 +27,7 @@ export default function JobListingPage() {
     const [showLocationPrompt, setShowLocationPrompt] = useState(false);
     const [userLocationInput, setUserLocationInput] = useState('');
     const triedGeo = useRef(false);
-    const router = useRouter && useRouter();
+    const router = useRouter();
     const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
 
     useEffect(() => {
@@ -640,7 +640,7 @@ export default function JobListingPage() {
                                 </div>
                                 <h4 style={{color: '#495057', marginBottom: '1rem'}}>No Jobs Found</h4>
                                 <p style={{color: '#6c757d', marginBottom: '2rem', fontSize: '1.1rem'}}>
-                                    Don't worry! Let's try some alternatives to help you find the perfect opportunity.
+                                    Don&apos;t worry! Let&apos;s try some alternatives to help you find the perfect opportunity.
                                 </p>
                                 
                                 <div className="suggestions-grid" style={{

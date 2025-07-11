@@ -107,7 +107,7 @@ export default function JobAlertsPage() {
                           </div>
                           <h4 className="text-muted mb-2">No bookmarked jobs yet</h4>
                           <p className="text-muted mb-4">
-                            When you bookmark jobs while browsing, they'll appear here for easy access.
+                            When you bookmark jobs while browsing, they&apos;ll appear here for easy access.
                           </p>
                           <a href="/job-listing" className="rts-btn btn-primary">
                             Browse Jobs
